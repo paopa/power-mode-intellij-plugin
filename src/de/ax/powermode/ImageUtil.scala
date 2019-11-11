@@ -60,34 +60,38 @@ object ImageUtil {
   private def getImagesCached(imageUrls: List[URI]) = {
     imageUrls.flatMap(uri =>
       imageCache.getOrUpdate(uri) {
-        try {
-          val maybeImg = Try(ImageIO.read(uri.toURL))
+        val maybeImg = Try {
+          Option(ImageIO.read(uri.toURL))
+        }
 
-          maybeImg match {
-            case Success(img) =>
-              val bufferedImage = new BufferedImage(img.getWidth,
-                                                    img.getHeight,
-                                                    BufferedImage.TYPE_INT_ARGB)
-              val graphics = bufferedImage.getGraphics
-              graphics.drawImage(img, 0, 0, null)
-              Some(bufferedImage)
-            case Failure(e) =>
-               e match {
-                 case io:IIOException =>
-                   PowerMode.logger
-                     .error(
-                       s"could not load image file! Please try to store your PowerMode " +
-                         s"Images/Animations in a different folder and restart the application! File not found: '$uri'!",
-                       e)
-                 case ex =>
-                   PowerMode.logger
-                     .error(
-                       s"could not load image file! Please try to store your PowerMode " +
-                         s"Images/Animations in a different folder and restart the application! File not found: '$uri'!",
-                       ex)
-               }
-              None
-          }
+        maybeImg match {
+          case Success(Some(img)) =>
+            val bufferedImage = new BufferedImage(img.getWidth,
+              img.getHeight,
+              BufferedImage.TYPE_INT_ARGB)
+            val graphics = bufferedImage.getGraphics
+            graphics.drawImage(img, 0, 0, null)
+            Some(bufferedImage)
+          case Failure(e) =>
+            e match {
+              case io:IIOException =>
+                PowerMode.logger
+                  .error(
+                    s"could not load image file! Please try to store your PowerMode " +
+                      s"Images/Animations in a different folder and restart the application! File not found: '$uri'!",
+                    e)
+              case ex =>
+                PowerMode.logger
+                  .error(
+                    s"could not load image file! Please try to store your PowerMode " +
+                      s"Images/Animations in a different folder and restart the application! File not found: '$uri'!",
+                    ex)
+            }
+            None
+          case Success(None) =>
+            PowerMode.logger
+              .error(s"could not load image from url '${uri.toURL}'")
+            None
         }
     })
   }

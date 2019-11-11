@@ -110,7 +110,7 @@ class PowerMode
   var maybeElementOfPowerContainerManager =
     Option.empty[ElementOfPowerContainerManager]
   private var enabled: Boolean = true
-  private var shakeEnabled: Boolean = true
+  private var shakeEnabled: Boolean = false
   var isBamEnabled: Boolean = true
   var isSoundsPlaying = false
   var powerIndicatorEnabled = true
@@ -164,7 +164,7 @@ class PowerMode
     val base = heatupFactor +
       ((1 - heatupFactor) * timeFactor)
     val elems = (base - heatupThreshold) / (1 - heatupThreshold)
-    elems
+
     val max = Seq(elems, 0.0).max
     assert(max <= 1)
     assert(max >= 0)
@@ -217,7 +217,7 @@ class PowerMode
     tf
   }
 
-  var caretAction: Boolean = true
+  var caretAction: Boolean = false
 
   override def initComponent: Unit = {
 PowerMode.logger.debug("initComponent...")

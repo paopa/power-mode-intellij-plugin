@@ -29,7 +29,7 @@ object Util {
             .contains(impl.getEditorKind) &&
           !impl.isOneLineMode
         } catch {
-          case _ => false
+          case _ :Throwable => false
         }
       case _ =>
         false
@@ -42,7 +42,7 @@ object Util {
         try {
           impl.getPreferredSize.height < maxSize || impl.getPreferredSize.width < maxSize
         } catch {
-          case _ => true
+          case _ :Throwable=> true
         }
       case _ =>
         false

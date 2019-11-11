@@ -756,6 +756,14 @@
                   <toolTipText value="Disable if having problems with hotkey visualization"/>
                 </properties>
               </component>
+              <component id="452c" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="!!! might interfere with autocompletion and other plugins/editors!" noi18n="true"/>
+                </properties>
+              </component>
             </children>
           </grid>
         </children>

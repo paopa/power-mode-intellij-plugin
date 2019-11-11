@@ -9,6 +9,7 @@ import de.ax.powermode.{PowerMode, Util}
 
 import scala.annotation.tailrec
 import scala.collection.mutable
+import scala.language.postfixOps
 
 /**
   * Created by nyxos on 25.02.17.

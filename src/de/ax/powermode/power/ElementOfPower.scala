@@ -18,7 +18,7 @@ trait ElementOfPower extends Power {
   def initLife: Long
 
   def lifeFactor: Float = {
-    1 - ((life - System.currentTimeMillis()) / initLife.toFloat) toFloat
+    1 - ((life - System.currentTimeMillis()) / initLife.toFloat)
   }
 
   def alive: Boolean = {

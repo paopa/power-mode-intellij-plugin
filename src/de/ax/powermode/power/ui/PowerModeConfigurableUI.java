@@ -11,6 +11,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import java.io.File;
 
 /**
  * @author Baptiste Mesta
@@ -93,7 +94,7 @@ public class PowerModeConfigurableUI implements ConfigurableUi<PowerMode> {
         visualizeEveryCaretMovementCheckBox.setSelected(powerMode.getIsCaretAction());
         visualizeEveryCaretMovementCheckBox.addChangeListener(e -> powerMode.setIsCaretAction(visualizeEveryCaretMovementCheckBox.isSelected()));
         PLAYMUSICCheckBox.setEnabled(powerMode.mediaPlayerExists().isSuccess());
-        PLAYMUSICCheckBox.setSelected(powerMode.isSoundsPlaying()&&powerMode.mediaPlayerExists().isSuccess());
+        PLAYMUSICCheckBox.setSelected(powerMode.isSoundsPlaying() && powerMode.mediaPlayerExists().isSuccess());
         PLAYMUSICCheckBox.addChangeListener(e -> powerMode.setIsSoundsPlaying(PLAYMUSICCheckBox.isSelected()));
         HOTKEYHEATUPCheckBox.setSelected(powerMode.isHotkeyHeatup());
         HOTKEYHEATUPCheckBox.addChangeListener(e -> powerMode.setHotkeyHeatup(HOTKEYHEATUPCheckBox.isSelected()));
@@ -155,17 +156,25 @@ public class PowerModeConfigurableUI implements ConfigurableUi<PowerMode> {
             flameImagesFolder.getDocument().addDocumentListener(new DocumentListener() {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
-                    powerMode.setCustomFlameImageFolder(flameImagesFolder.getText());
+                    setFolder(powerMode);
                 }
 
                 @Override
                 public void removeUpdate(DocumentEvent e) {
-                    powerMode.setCustomFlameImageFolder(flameImagesFolder.getText());
+                    setFolder(powerMode);
                 }
 
                 @Override
                 public void changedUpdate(DocumentEvent e) {
-                    powerMode.setCustomFlameImageFolder(flameImagesFolder.getText());
+                    setFolder(powerMode);
+                }
+
+                private void setFolder(PowerMode powerMode) {
+                    if (validateImagePath(powerMode,
+                            PowerModeConfigurableUI.this.flameImagesFolder,
+                            PowerModeConfigurableUI.this.customFlameImages)) {
+                        powerMode.setCustomFlameImageFolder(flameImagesFolder.getText());
+                    }
                 }
             });
         }
@@ -179,19 +188,41 @@ public class PowerModeConfigurableUI implements ConfigurableUi<PowerMode> {
             bamImagesFolder.getDocument().addDocumentListener(new DocumentListener() {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
-                    powerMode.setCustomBamImageFolder(bamImagesFolder.getText());
+                    setFolder(powerMode);
                 }
 
                 @Override
                 public void removeUpdate(DocumentEvent e) {
-                    powerMode.setCustomBamImageFolder(bamImagesFolder.getText());
+                    setFolder(powerMode);
                 }
 
                 @Override
                 public void changedUpdate(DocumentEvent e) {
-                    powerMode.setCustomBamImageFolder(bamImagesFolder.getText());
+                    setFolder(powerMode);
+                }
+
+                private void setFolder(PowerMode powerMode) {
+                    if (validateImagePath(powerMode,
+                            PowerModeConfigurableUI.this.bamImagesFolder,
+                            PowerModeConfigurableUI.this.customBamImages)) {
+                        powerMode.setCustomBamImageFolder(bamImagesFolder.getText());
+                    }
                 }
             });
+        }
+    }
+
+    private boolean validateImagePath(PowerMode powerMode, JTextField flameImagesFolder, JCheckBox customFlameImages) {
+        String folder = flameImagesFolder.getText();
+        File file = new File(folder).getAbsoluteFile();
+        if (!file.exists() || file.getAbsolutePath().toLowerCase().contains("temp") || file.getAbsolutePath().toLowerCase().contains("tmp")) {
+            customFlameImages.setSelected(false);
+            JOptionPane.showMessageDialog(mainPanel,
+                    "invalid folder! Folder '" + file.getAbsolutePath() + "' does not exist or is a temp file (contains 'Temp' or 'tmp')", "invalid folder",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else {
+            return true;
         }
     }
 

@@ -97,7 +97,7 @@ class ElementOfPowerContainerManager extends EditorFactoryAdapter with Power {
             }
           }
         } catch {
-          case e => PowerMode.logger.error(e.getMessage, e)
+          case e :Throwable => PowerMode.logger.error(e.getMessage, e)
         }
       }
     }

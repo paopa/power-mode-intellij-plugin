@@ -23,11 +23,11 @@ class HotkeyHeatupListener
 
   lazy val actionsToKeyStrokes = {
     Map(
-      KeymapManager.getInstance.getActiveKeymap.getActionIds.seq
+      KeymapManager.getInstance.getActiveKeymap.getActionIds.toList
         .map(ActionManager.getInstance.getAction)
         .filter(a => a != null && a.getShortcutSet != null)
         .map { a =>
-          val keyStrokes = a.getShortcutSet.getShortcuts.seq
+          val keyStrokes = a.getShortcutSet.getShortcuts.toList
             .filter(_.isKeyboard)
             .filter(_.isInstanceOf[KeyboardShortcut])
             .map(_.asInstanceOf[KeyboardShortcut])

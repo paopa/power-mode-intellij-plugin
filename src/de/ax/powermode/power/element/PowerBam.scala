@@ -6,6 +6,8 @@ import java.awt.{AlphaComposite, Graphics, Graphics2D}
 import de.ax.powermode.{ImageUtil, Util}
 import de.ax.powermode.power.ElementOfPower
 
+import scala.language.postfixOps
+
 /**
   * Created by nyxos on 28.12.16.
   */

@@ -18,20 +18,15 @@ package de.ax.powermode.power.management
 import java.awt.event.{ComponentEvent, ComponentListener}
 import java.awt.{Graphics, Point, Rectangle}
 import javax.swing._
-
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.editor.event._
 import com.intellij.openapi.editor.{Editor, ScrollingModel}
 import de.ax.powermode._
 import de.ax.powermode.power.ElementOfPower
-import de.ax.powermode.power.element.{
-  PowerBam,
-  PowerFlame,
-  PowerIndicator,
-  PowerSpark
-}
+import de.ax.powermode.power.element.{PowerBam, PowerFlame, PowerIndicator, PowerSpark}
 
-import scala.collection.JavaConversions._
+import scala.jdk.CollectionConverters._
+import scala.language.postfixOps
 
 object ElementOfPowerContainer {
   private val logger = Logger.getInstance(this.getClass)
@@ -65,7 +60,7 @@ class ElementOfPowerContainer(editor: Editor)
 
     def changeCarets: Unit = {
       lastPositions = {
-        editor.getCaretModel.getAllCarets.map(caret => {
+        editor.getCaretModel.getAllCarets.asScala.toSeq.map(caret => {
           (Util.getPoint(editor.offsetToVisualPosition(caret.getSelectionStart),
                          caret.getEditor),
            Util.getPoint(editor.offsetToVisualPosition(caret.getSelectionEnd),
@@ -115,7 +110,7 @@ class ElementOfPowerContainer(editor: Editor)
   })
 
   def getAllCaretPositions: Seq[Point] = {
-    editor.getCaretModel.getAllCarets.map(caret =>
+    editor.getCaretModel.getAllCarets.asScala.toSeq.map(caret =>
       Util.getPoint(caret.getVisualPosition, caret.getEditor))
   }
 

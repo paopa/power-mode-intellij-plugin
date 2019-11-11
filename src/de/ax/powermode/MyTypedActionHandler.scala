@@ -6,7 +6,7 @@ import com.intellij.openapi.actionSystem.DataContext
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.editor.actionSystem.TypedActionHandler
 import java.lang.IllegalStateException
-import scala.collection.JavaConversions._
+import scala.jdk.CollectionConverters._
 
 /**
   * Created by nyxos on 04.01.17.
@@ -33,7 +33,7 @@ class MyTypedActionHandler(typedActionHandler: TypedActionHandler)
   }
 
   def getEditorCaretPositions(editor: Editor): Seq[Point] = {
-    editor.getCaretModel.getAllCarets
+    editor.getCaretModel.getAllCarets.asScala.toList
       .map({ c =>
         Util.getCaretPosition(editor, c)
       })
