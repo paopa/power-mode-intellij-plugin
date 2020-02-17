@@ -34,8 +34,8 @@ import scala.collection.immutable.Seq
 import scala.util.Try
 
 /**
-  * @author Baptiste Mesta
-  */
+ * @author Baptiste Mesta
+ */
 object PowerMode {
 
   val logger: Logger = Logger.getLogger(classOf[PowerMode])
@@ -65,10 +65,12 @@ object PowerMode {
 }
 
 @State(name = "PowerModeII",
-       storages = Array(new Storage(file = "$APP_CONFIG$/power.mode.ii.xml")))
+  storages = Array(new Storage(file = "$APP_CONFIG$/power.mode.ii.xml")))
 class PowerMode
-    extends ApplicationComponent
-    with PersistentStateComponent[PowerMode]  {
+  extends ApplicationComponent
+    with PersistentStateComponent[PowerMode] {
+  var isSingleBamImagePerEvent: Boolean = false
+
   var hotkeyHeatup: Boolean = true
 
   var bamLife: Long = 1000
@@ -131,14 +133,15 @@ class PowerMode
   }
 
   def increaseHeatup(
-      dataContext: Option[DataContext] = Option.empty[DataContext],
-      keyStroke: Option[KeyStroke] = Option.empty[KeyStroke]): Unit = {
+                      dataContext: Option[DataContext] = Option.empty[DataContext],
+                      keyStroke: Option[KeyStroke] = Option.empty[KeyStroke]): Unit = {
     val ct = System.currentTimeMillis()
     lastKeys = (keyStroke, ct) :: filterLastKeys(ct)
     dataContext.foreach(dc =>
       maybeElementOfPowerContainerManager.foreach(_.showIndicator(dc)))
 
   }
+
   val mediaPlayerExists = Try {
     Class.forName("javafx.scene.media.MediaPlayer")
   }
@@ -182,8 +185,8 @@ class PowerMode
         val keysWorth = lastKeys.map {
           case (Some(ks), _) =>
             val size = Seq(InputEvent.CTRL_DOWN_MASK,
-                           InputEvent.ALT_DOWN_MASK,
-                           InputEvent.SHIFT_DOWN_MASK).count(m =>
+              InputEvent.ALT_DOWN_MASK,
+              InputEvent.SHIFT_DOWN_MASK).count(m =>
               (ks.getModifiers & m) > 0)
             val res = size * hotkeyWeight
             res
@@ -204,8 +207,8 @@ class PowerMode
         val keysWorth = lastKeys.map {
           case (Some(ks), _) =>
             val size = Seq(InputEvent.CTRL_DOWN_MASK,
-                           InputEvent.ALT_DOWN_MASK,
-                           InputEvent.SHIFT_DOWN_MASK).count(m =>
+              InputEvent.ALT_DOWN_MASK,
+              InputEvent.SHIFT_DOWN_MASK).count(m =>
               (ks.getModifiers & m) > 0)
             val res = size * hotkeyWeight
             res
@@ -220,7 +223,7 @@ class PowerMode
   var caretAction: Boolean = false
 
   override def initComponent: Unit = {
-PowerMode.logger.debug("initComponent...")
+    PowerMode.logger.debug("initComponent...")
     val editorFactory = EditorFactory.getInstance
     maybeElementOfPowerContainerManager = Some(
       new ElementOfPowerContainerManager)
@@ -523,4 +526,11 @@ PowerMode.logger.debug("initComponent...")
   def getCustomBamImageFolder =
     customBamImageFolder.map(_.getAbsolutePath).getOrElse("")
 
+  def getIsSingleBamImagePerEvent() = {
+    isSingleBamImagePerEvent
+  }
+
+  def setIsSingleBamImagePerEvent(isSingleBamImagePerEvent: Boolean): Unit = {
+    this.isSingleBamImagePerEvent = isSingleBamImagePerEvent
+  }
 }

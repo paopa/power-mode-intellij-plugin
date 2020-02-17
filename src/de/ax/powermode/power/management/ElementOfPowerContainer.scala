@@ -122,7 +122,7 @@ class ElementOfPowerContainer(editor: Editor)
           case (a, b) =>
             val w = editor.getComponent.getWidth.toDouble
             val h = editor.getComponent.getHeight.toDouble
-            initializeAnimation(a, new Point(math.min(0, b.x), math.min(0, b.y)), math.max(50, Seq(w, h, width).min))
+            initializeAnimation(a, new Point(math.min(0, b.x), math.min(0, b.y)), width)
         }
       })
     }
@@ -181,13 +181,13 @@ class ElementOfPowerContainer(editor: Editor)
     val width = math.max(b.x - x, 50)
     val height = math.max(b.y - y, 50)
     val dim =
-      (Seq(lineWidth.toInt, width, height, 50).max * powerMode.valueFactor).toInt
+      (Seq(Seq(lineWidth.toInt, width, height, 50).max,editor.getComponent.getWidth,editor.getComponent.getHeight).min * powerMode.valueFactor).toInt
     if (b.y - y.abs < dim) {
       y = y - dim / 2
     }
     elementsOfPower :+= (PowerBam(
-      x,
-      y,
+      math.max(0, x),
+      math.max(0, y),
       dim,
       dim,
       powerMode.bamLife * powerMode.valueFactor toLong), getScrollPosition)
