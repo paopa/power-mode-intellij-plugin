@@ -4,3 +4,5 @@ out
 *.jar
 lib/
 *.zip
+**/target
+.bsp/
