@@ -32,7 +32,7 @@ public class MultiGradientPanel extends JPanel {
         GradientPaint twoColorGradient = new GradientPaint(
                 size, 0f, colorEdges.getRightTop(), 0, size, colorEdges.getLeftBottom());
 
-        float radius = size - (size / 4);
+        float radius = size - (size / 4.0f);
         float[] dist = {0f, 1.0f};
         Point2D center = new Point2D.Float(0f, 0f);
         Color noColor = new Color(0f, 0f, 0f, 0f);
