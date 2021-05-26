@@ -65,7 +65,7 @@ object PowerMode {
 }
 
 @State(name = "PowerModeII",
-  storages = Array(new Storage(file = "$APP_CONFIG$/power.mode.ii.xml")))
+  storages = Array(new Storage(value = "$APP_CONFIG$/power.mode.ii.xml")))
 class PowerMode
   extends ApplicationComponent
     with PersistentStateComponent[PowerMode] {

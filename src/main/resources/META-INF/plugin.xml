@@ -1,6 +1,6 @@
 <idea-plugin>
-    <id>de.ax.powermode</id>
-    <name>Power Mode II</name>
+    <id>per.pao</id>
+    <name>Power Mode II-X</name>
     <version>100.001</version>
     <vendor email="axaluss@gmail.com" url="https://github.com/axaluss/power-mode-intellij-plugin">Alexander Thom
     </vendor>
@@ -62,6 +62,7 @@
     <extensions defaultExtensionNs="com.intellij">
         <applicationConfigurable groupId="appearance" groupWeight="20" id="power.mode.ii" displayName="Power Mode II"
                                  instance="de.ax.powermode.PowerModeConfigurable"/>
+<!--        <themeProvider id="c2ee71be-2127-467d-9da5-7dc30b4fa56d" path="/null"/>-->
     </extensions>
 
     <actions>

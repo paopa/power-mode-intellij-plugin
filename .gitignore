@@ -6,3 +6,6 @@ lib/
 *.zip
 **/target
 .bsp/
+.gradle
+# Ignore Gradle build output directory
+build
