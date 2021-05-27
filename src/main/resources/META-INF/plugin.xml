@@ -31,7 +31,7 @@
     <extensions defaultExtensionNs="com.intellij">
         <applicationConfigurable groupId="appearance" groupWeight="20" id="power.mode.ii" displayName="Power Mode II-X"
                                  instance="_power.mode.PowerModeConfigurable"/>
-<!--        <themeProvider id="c2ee71be-2127-467d-9da5-7dc30b4fa56d" path="/null"/>-->
+        <!--        <themeProvider id="c2ee71be-2127-467d-9da5-7dc30b4fa56d" path="/null"/>-->
     </extensions>
 
     <actions>
