@@ -52,27 +52,27 @@
 
     <application-components>
         <component>
-            <implementation-class>de.ax.powermode.PowerMode</implementation-class>
+            <implementation-class>_power.mode.PowerMode</implementation-class>
         </component>
         <component>
-            <implementation-class>de.ax.powermode.power.hotkeys.HotkeyHeatupListener</implementation-class>
+            <implementation-class>_power.mode.module.hotkeys.HotkeyHeatupListener</implementation-class>
         </component>
     </application-components>
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationConfigurable groupId="appearance" groupWeight="20" id="power.mode.ii" displayName="Power Mode II"
-                                 instance="de.ax.powermode.PowerModeConfigurable"/>
+                                 instance="_power.mode.PowerModeConfigurable"/>
 <!--        <themeProvider id="c2ee71be-2127-467d-9da5-7dc30b4fa56d" path="/null"/>-->
     </extensions>
 
     <actions>
 
-        <action id="togglePowerModeII" class="de.ax.powermode.TogglePowerMode" text="Toggle Power Mode II"
+        <action id="togglePowerModeII" class="_power.mode.TogglePowerMode" text="Toggle Power Mode II"
                 description="Toggle Power Mode II">
             <add-to-group group-id="ToolsMenu" anchor="last"/>
             <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt O"/>
         </action>
-        <action id="powerModeIInextSong" class="de.ax.powermode.NextSongAction" text="next Power Mode song"
+        <action id="powerModeIInextSong" class="_power.mode.NextSongAction" text="next Power Mode song"
                 description="next Power Mode song">
             <add-to-group group-id="ToolsMenu" anchor="last"/>
             <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt M"/>

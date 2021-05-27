@@ -9,7 +9,7 @@
         </layout>
     </appender>
 
-    <category name="de.ax.powermode">
+    <category name="power.mode">
         <priority value="trace"/>
         <appender-ref ref="console"/>
     </category>
