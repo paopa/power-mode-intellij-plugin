@@ -32,7 +32,6 @@ import java.io.File
 import javax.swing.KeyStroke
 import scala.util.Try
 
-
 /**
  * @author Baptiste Mesta
  */
@@ -64,7 +63,7 @@ object PowerMode {
   }
 }
 
-@State(name = "PowerModeII",
+@State(name = "PowerModeII-X",
   storages = Array(new Storage(value = "$APP_CONFIG$/power.mode.ii.xml")))
 class PowerMode
   extends ApplicationComponent
@@ -244,7 +243,7 @@ class PowerMode
   }
 
   override def getComponentName: String = {
-    return "PowerModeII"
+    return "PowerModeII-X"
   }
 
   def getState: PowerMode = {

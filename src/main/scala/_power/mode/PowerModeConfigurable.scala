@@ -21,11 +21,10 @@ import power.mode.config.ui.PowerModeConfigurableUI
 /**
  * @author Baptiste Mesta
  */
-class PowerModeConfigurable()
-  extends ConfigurableBase[PowerModeConfigurableUI, PowerMode](
-    "power.mode.II",
-    "Power Mode II",
-    "power.mode.II") {
+class PowerModeConfigurable() extends ConfigurableBase[PowerModeConfigurableUI, PowerMode](
+  "power.mode.II-X",
+  "Power Mode II-X",
+  "power.mode.II-X") {
   val settings: PowerMode = PowerMode.getInstance
 
   protected def getSettings: PowerMode = {

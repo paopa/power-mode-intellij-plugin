@@ -36,12 +36,12 @@
 
     <actions>
 
-        <action id="togglePowerModeII" class="_power.mode.TogglePowerMode" text="Toggle Power Mode II"
-                description="Toggle Power Mode II">
+        <action id="togglePowerModeII-X" class="_power.mode.TogglePowerMode" text="Toggle Power Mode II-X"
+                description="Toggle Power Mode II-X">
             <add-to-group group-id="ToolsMenu" anchor="last"/>
             <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt O"/>
         </action>
-        <action id="powerModeIInextSong" class="_power.mode.NextSongAction" text="next Power Mode song"
+        <action id="powerModeIIXnextSong" class="_power.mode.NextSongAction" text="next Power Mode song"
                 description="next Power Mode song">
             <add-to-group group-id="ToolsMenu" anchor="last"/>
             <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt M"/>

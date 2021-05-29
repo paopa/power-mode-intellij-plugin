@@ -295,8 +295,6 @@ public class PowerModeConfigurableUI implements ConfigurableUi<PowerMode> {
 
     private void createUIComponents() {
         colorView = new MultiGradientPanel(200, PowerMode.obtainColorEdges(PowerMode.getInstance()));
-
-
     }
 
     /**

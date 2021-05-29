@@ -3,6 +3,7 @@ plugins {
     id 'scala'
     id 'org.jetbrains.intellij' version '0.7.3'
     id 'application'
+    id 'idea'
 }
 
 group 'per.pao.plugin'
@@ -46,4 +47,11 @@ patchPluginXml {
 
 test {
     useJUnitPlatform()
+}
+
+idea {
+    module{
+        downloadJavadoc(true)
+        downloadSources(true)
+    }
 }
