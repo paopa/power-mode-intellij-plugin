@@ -12,12 +12,12 @@ import scala.util.Try
 object Util {
   def alpha(f: Float): Float = {
     if (f < 0) {
-      0f
-    } else if (f > 1) {
-      1f
-    } else {
-      f
+      return 0f
     }
+    if (f > 1) {
+      return 1f
+    }
+    f
   }
 
   def isActualEditor(editor: Editor): Boolean = {

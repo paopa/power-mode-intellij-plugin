@@ -11,10 +11,10 @@ import scala.collection.mutable
 import scala.language.postfixOps
 
 /**
-  * Created by nyxos on 25.02.17.
-  */
+ * Created by nyxos on 25.02.17.
+ */
 object PowerIndicator {
-  var indicators = mutable.Queue.empty[PowerIndicator]
+  var indicators: mutable.Queue[PowerIndicator] = mutable.Queue.empty[PowerIndicator]
 
   def addIndicator(i: PowerIndicator): Unit = {
     this.synchronized {
@@ -24,16 +24,16 @@ object PowerIndicator {
   }
 
   val grands = Seq("perfect",
-                   "excellent",
-                   "superb",
-                   "sublime",
-                   "dominating",
-                   "marvelous",
-                   "splendid",
-                   "majestic",
-                   "unreal",
-                   "fabulous",
-                   "great")
+    "excellent",
+    "superb",
+    "sublime",
+    "dominating",
+    "marvelous",
+    "splendid",
+    "majestic",
+    "unreal",
+    "fabulous",
+    "great")
 
   var lastGrand = Option.empty[String]
 
@@ -64,7 +64,7 @@ case class PowerIndicator(_x: Float,
                           _height: Float,
                           initLife: Long,
                           editor: Editor)
-    extends ElementOfPower {
+  extends ElementOfPower {
   val identifier = System.currentTimeMillis() + (Math.random() * 1000000)
   var diffLife = Option.empty[Long]
   var x: Double = _x
@@ -115,7 +115,7 @@ case class PowerIndicator(_x: Float,
       val Some((dxx, dyy)) = lastScrollPosition
         .map(lp => {
           val (nx, ny) = (editor.getScrollingModel.getHorizontalScrollOffset,
-                          editor.getScrollingModel.getVerticalScrollOffset)
+            editor.getScrollingModel.getVerticalScrollOffset)
           (lp._1 - nx, lp._2 - ny)
         })
         .orElse(Some(0, 0))
@@ -130,18 +130,18 @@ case class PowerIndicator(_x: Float,
         new BufferedImage(600, 600, BufferedImage.TYPE_INT_ARGB)
       val graphics = bufferedImage.getGraphics
       drawIndicator(graphics.asInstanceOf[Graphics2D],
-                    bufferedImage.getWidth,
-                    bufferedImage.getHeight)
+        bufferedImage.getWidth,
+        bufferedImage.getHeight)
       g2d.drawImage(bufferedImage,
-                    math.max(x, 0) - dxx toInt,
-                    math.max(y, 0) - dyy toInt,
-                    width toInt,
-                    height toInt,
-                    null)
+        math.max(x, 0) - dxx toInt,
+        math.max(y, 0) - dyy toInt,
+        width toInt,
+        height toInt,
+        null)
       g2d.dispose()
       lastScrollPosition = Some(
         (editor.getScrollingModel.getHorizontalScrollOffset,
-         editor.getScrollingModel.getVerticalScrollOffset))
+          editor.getScrollingModel.getVerticalScrollOffset))
     }
   }
 
@@ -151,8 +151,8 @@ case class PowerIndicator(_x: Float,
     graphics.setColor(Color.white)
     graphics.setFont(new Font("Dialog", Font.PLAIN, 100))
     graphics.drawString((powerMode.rawValueFactor * 100).toInt.toString + " %",
-                        10,
-                        100)
+      10,
+      100)
     graphics.setColor(Color.white)
     graphics.drawString(grand, 10, 200)
     graphics.setColor(Color.white)
@@ -168,17 +168,17 @@ case class PowerIndicator(_x: Float,
     while (f > 0) {
       graphics.setColor(Color.white)
       graphics.fillRect(10,
-                        height - (((max.toInt + 1) - math
-                          .ceil(f)) * (barSpace + barHeight)) toInt,
-                        width * (if (f >= 1) 1 else f) - 10 toInt,
-                        barHeight)
+        height - (((max.toInt + 1) - math
+          .ceil(f)) * (barSpace + barHeight)) toInt,
+        width * (if (f >= 1) 1 else f) - 10 toInt,
+        barHeight)
       graphics.setColor(Color.black)
       graphics.setStroke(new BasicStroke(10))
       graphics.drawRect(9,
-                        height - (((max.toInt + 1) - math
-                          .ceil(f)) * (barSpace + barHeight)) - 1 toInt,
-                        width * (if (f >= 1) 1 else f) - 1 - 10 toInt,
-                        barHeight - 1)
+        height - (((max.toInt + 1) - math
+          .ceil(f)) * (barSpace + barHeight)) - 1 toInt,
+        width * (if (f >= 1) 1 else f) - 1 - 10 toInt,
+        barHeight - 1)
       f -= 1
     }
   }
